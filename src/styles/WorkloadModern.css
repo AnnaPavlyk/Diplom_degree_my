@@ -1,0 +1,165 @@
+/* Isolated layout for the workload screen. It deliberately does not reuse the
+   generic .sidebar/.main-content selectors from the older pages. */
+.workload-page {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #f4f6f9;
+  color: #1f2937;
+}
+
+.workload-page > aside {
+  position: relative !important;
+  inset: auto !important;
+  z-index: 2 !important;
+  flex: 0 0 260px;
+  width: 260px !important;
+  height: 100vh;
+  transform: none !important;
+  background: #0b2545 !important;
+  box-shadow: none !important;
+}
+
+.workload-page > main {
+  min-width: 0;
+  flex: 1;
+  height: 100vh;
+  margin-left: 0 !important;
+  overflow-y: auto;
+}
+
+.workload-page > main > div {
+  max-width: none !important;
+  padding: 20px !important;
+}
+
+.workload-page header {
+  min-height: 74px;
+  margin-bottom: 15px !important;
+}
+
+.workload-page header h1 {
+  font-size: 20px !important;
+  line-height: 1.25;
+}
+
+.workload-page header > div:last-child label {
+  min-width: 210px;
+}
+
+.workload-page header select {
+  width: 100%;
+}
+
+.workload-page main > div > section:first-of-type {
+  gap: 12px !important;
+  margin-bottom: 15px !important;
+}
+
+.workload-page main article {
+  min-height: 88px !important;
+  border-color: #e5e7eb !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.workload-page main > div > nav {
+  margin-bottom: 15px !important;
+  border-color: #e5e7eb !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.workload-page main > div > nav button {
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 8px 13px !important;
+}
+
+.workload-tab-intro {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 15px;
+  padding: 13px 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #eff6ff 0%, #ffffff 72%);
+}
+
+.workload-tab-intro-icon {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 18px;
+}
+
+.workload-tab-intro h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.workload-tab-intro p {
+  margin: 3px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.workload-page main table thead {
+  background: #f8fafc;
+}
+
+.workload-page main table th {
+  color: #475569;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.workload-page main table tbody tr {
+  transition: background-color .15s ease;
+}
+
+.workload-page main table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.workload-page main label {
+  color: #334155;
+}
+
+.workload-page main select {
+  min-height: 42px;
+}
+
+.workload-page main > div > section:not(:first-of-type) {
+  border-color: #e5e7eb !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+}
+
+.workload-page > aside button {
+  letter-spacing: normal;
+}
+
+@media (max-width: 900px) {
+  .workload-page > aside {
+    position: fixed !important;
+    transform: translateX(-100%) !important;
+  }
+
+  .workload-page > aside.translate-x-0 {
+    transform: translateX(0) !important;
+  }
+
+  .workload-page > main > div {
+    padding: 16px !important;
+  }
+}

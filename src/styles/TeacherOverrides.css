@@ -1,0 +1,15 @@
+.teacher-submenu { left: auto !important; right: calc(100% + 6px) !important; }
+
+.teacher-workspace.read-only .teacher-dropdown > button,
+.teacher-workspace.read-only .table-edit { display: none; }
+
+/* Меню викладачів завжди має бути над таблицею, а не під її комірками. */
+.teacher-main header { position: relative; z-index: 40; }
+.teacher-menu { z-index: 60; }
+.teacher-dropdown { z-index: 70 !important; overflow: visible; }
+.teacher-submenu { z-index: 80 !important; }
+.teacher-logout { display:flex; align-items:center; justify-content:center; gap:8px; }
+
+@media (max-width: 900px) {
+  .teacher-submenu { left: calc(100% + 6px) !important; right: auto !important; }
+}

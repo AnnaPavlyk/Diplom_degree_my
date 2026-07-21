@@ -1,0 +1,81 @@
+/* Єдина бічна панель для головної, навантаження, викладачів і довідників. */
+.legacy-sidebar { display:none !important; }
+.dashboard-container .sidebar,
+.teacher-workspace .teacher-sidebar,
+.app-sidebar {
+  width: 250px !important;
+  flex: 0 0 250px !important;
+  min-height: 100vh;
+  padding: 16px !important;
+  background: #0f1b31 !important;
+  color: #9eacc2;
+  box-sizing: border-box;
+}
+
+.dashboard-container .sidebar-brand,
+.teacher-workspace .teacher-brand,
+.app-sidebar-brand {
+  min-height: 74px;
+  padding: 5px 4px 15px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  box-sizing: border-box;
+}
+
+.dashboard-container .sidebar-brand h3,
+.teacher-workspace .teacher-brand b,
+.app-sidebar-brand b { color:#fff !important; font-size:16px !important; font-weight:700 !important; }
+.dashboard-container .sidebar-brand p,
+.teacher-workspace .teacher-brand small,
+.app-sidebar-brand small { color:#9eacc2 !important; font-size:12px !important; }
+
+.dashboard-container .sidebar-menu,
+.teacher-workspace .teacher-sidebar nav,
+.app-sidebar-nav { margin-top:16px !important; gap:3px !important; }
+
+.dashboard-container .menu-category,
+.teacher-workspace .teacher-sidebar nav span,
+.app-sidebar-nav span { margin:13px 8px 4px !important; color:#536781 !important; font-size:9px !important; font-weight:700 !important; }
+
+.dashboard-container .menu-item,
+.teacher-workspace .teacher-sidebar nav button,
+.app-sidebar-nav button { min-height:40px; padding:9px 11px !important; border-radius:7px !important; color:#aab8cc !important; font-size:13px !important; }
+
+.dashboard-container .menu-item.active,
+.dashboard-container .menu-item:hover,
+.teacher-workspace .teacher-sidebar nav button.active,
+.teacher-workspace .teacher-sidebar nav button:hover,
+.app-sidebar-nav button.active,
+.app-sidebar-nav button:hover { background:#22324a !important; color:#fff !important; box-shadow:inset 3px 0 0 #2f6bff; }
+
+.dashboard-container .sidebar-profile,
+.teacher-workspace .teacher-user,
+.app-sidebar-user { margin-top:auto !important; min-height:86px; padding:13px 5px 10px !important; border-top:1px solid rgba(255,255,255,.10) !important; box-sizing:border-box; }
+
+.dashboard-container .sidebar-profile .profile-info,
+.dashboard-container .sidebar-profile .profile-avatar-placeholder,
+.dashboard-container .sidebar-profile .profile-info > div,
+.dashboard-container .sidebar-profile .profile-info > svg { background:transparent !important; box-shadow:none !important; }
+.dashboard-container .sidebar-profile { background:transparent !important; }
+.dashboard-container .sidebar-profile .profile-info { margin-bottom:5px !important; padding:0 !important; border-radius:0 !important; }
+.dashboard-container .sidebar-profile .profile-avatar-placeholder { width:28px !important; height:28px !important; margin-right:0 !important; color:#aab8cc !important; }
+
+.dashboard-container .profile-info,
+.teacher-workspace .teacher-user,
+.app-sidebar-user { gap:11px !important; }
+.dashboard-container .profile-info h4,
+.teacher-workspace .teacher-user b,
+.app-sidebar-user b { color:#fff !important; font-size:13px !important; overflow-wrap:anywhere; }
+.dashboard-container .profile-info p,
+.teacher-workspace .teacher-user small,
+.app-sidebar-user small { color:#9eacc2 !important; font-size:12px !important; }
+
+.dashboard-container .btn-logout,
+.app-sidebar-logout,
+.teacher-workspace .teacher-logout { width:100%; min-height:38px; margin-top:8px; border:0 !important; border-radius:7px !important; background:#1d2c44 !important; color:#b7c4d6 !important; font:500 13px Inter,Arial,sans-serif; cursor:pointer; }
+
+@media (max-width: 900px) {
+  .dashboard-container .sidebar,
+  .teacher-workspace .teacher-sidebar,
+  .app-sidebar { width:62px !important; flex-basis:62px !important; padding:10px 7px !important; }
+}

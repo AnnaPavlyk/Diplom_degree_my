@@ -1,0 +1,1045 @@
+/* --- Системні змінні та скидання стилів --- */
+:root {
+  --blue-brand: #1e40af;
+  --blue-brand-hover: #1d4ed8;
+  --bg-main: #f8fafc;
+  --bg-sidebar: #0f172a;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --red-alert: #ef4444;
+  --green-success: #10b981;
+  --orange-warning: #f59e0b;
+  --radius: 8px;
+  --transition: all 0.2s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* --- Головний контейнер (Layout) --- */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* --- БОКОВЕ МЕНЮ (Sidebar) --- */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 15px;
+  flex-shrink: 0;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.sidebar-logo {
+  width: 40px;
+  height: auto;
+}
+
+.sidebar-brand h3 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 20px;
+  flex-grow: 1;
+}
+
+.menu-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin: 15px 0 5px 10px;
+  letter-spacing: 0.5px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.menu-item:hover, .menu-item.active {
+  color: #ffffff;
+  background-color: #1e293b;
+}
+
+.menu-item.active {
+  background-color: var(--blue-brand);
+  font-weight: 500;
+}
+
+.sidebar-profile {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #1e293b;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.profile-avatar-placeholder {
+  width: 36px;
+  height: 36px;
+  background-color: #1e293b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+}
+
+.profile-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.profile-info p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-logout {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #334155;
+  color: #f1f5f9;
+  padding: 8px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  transition: var(--transition);
+}
+
+.btn-logout:hover {
+  background-color: var(--red-alert);
+  border-color: var(--red-alert);
+}
+
+/* --- ОСНОВНА РОБОЧА ЗОНА (Main Content) --- */
+.main-content {
+  flex-grow: 1;
+  padding: 20px 25px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100vh;
+}
+
+/* Шапка */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.main-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.date-badge {
+  background-color: #eff6ff;
+  color: var(--blue-brand);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* --- КОМПАКТНІ МЕТРИКИ --- */
+.metrics-grid {
+  display: grid;
+  width: 100%;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px 16px;
+}
+
+.metric-card p {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.metric-card h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* --- НАВІГАЦІЯ ТАБІВ (Вкладки) --- */
+.window-tabs-navigation {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 2px;
+}
+
+.tab-navigation-btn {
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  position: relative;
+  bottom: -2px;
+  transition: var(--transition);
+}
+
+.tab-navigation-btn:hover {
+  color: var(--blue-brand);
+  background-color: #f1f5f9;
+}
+
+.tab-navigation-btn.active-tab {
+  color: var(--blue-brand);
+  border-bottom: 2px solid var(--blue-brand);
+  font-weight: 600;
+  background-color: #ffffff;
+}
+
+/* --- ДИНАМІЧНІ ВІКНА (Картки-контейнери) --- */
+.workspace-dynamic-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card-window {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* A form is a focused task, not an empty full-page canvas. */
+  flex-grow: 0;
+  min-height: 0;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 10px 28px -20px rgba(15, 23, 42, 0.35);
+}
+
+/* Modern right-hand workspace while preserving the familiar navigation shell. */
+.main-content .custom-card-window > .mx-auto {
+  width: min(100%, 680px);
+  margin: 4px auto !important;
+  padding: 8px 4px !important;
+}
+
+.main-content .custom-card-window h2 {
+  font-size: 20px;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.main-content .custom-card-window h2 + p {
+  margin-top: 6px;
+  color: #64748b;
+}
+
+.main-content .custom-card-window label.block {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.main-content .custom-card-window label.block select {
+  min-height: 38px;
+  margin-top: 5px;
+  border-color: #dbe3ee;
+  border-radius: 8px;
+  color: #1e293b;
+  background: #fff;
+}
+
+.main-content .custom-card-window label.block select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.main-content .custom-card-window .mt-6.grid {
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.main-content .custom-card-window .mt-2.flex {
+  padding-top: 6px;
+}
+
+.main-content .custom-card-window button {
+  min-height: 36px;
+}
+
+/* Keep the "Next" button inside the first-step form on short screens. */
+.main-content .custom-card-window > .mx-auto.max-w-xl {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.main-content .custom-card-window > .mx-auto.max-w-xl h2 {
+  font-size: 18px;
+}
+
+.main-content .custom-card-window > .mx-auto.max-w-xl .mt-2 {
+  margin-top: 2px;
+}
+
+.main-content .custom-card-window .table-container,
+.main-content .custom-card-window .overflow-x-auto {
+  border-radius: 10px;
+}
+
+.main-content .custom-card-window .overflow-x-auto {
+  border: 1px solid #e2e8f0;
+}
+
+.main-content .custom-card-window .overflow-x-auto table {
+  overflow: hidden;
+}
+
+.main-content .custom-card-window .overflow-x-auto thead {
+  background: #f8fafc;
+}
+
+.main-content .custom-card-window .overflow-x-auto tbody tr:hover {
+  background: #f8fafc;
+}
+
+.main-content [role="alert"] {
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+}
+
+/* Keep the sidebar fixed, but never clip the workspace on a short screen or
+   when the browser is zoomed in. Dashboard.css disables page scrolling, so
+   the workload page owns its scrolling area explicitly. */
+.dashboard-container .main-content {
+  min-height: 0;
+  height: 100vh;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.dashboard-container .sidebar {
+  overflow-y: auto;
+}
+
+@media (max-height: 760px) {
+  .main-content {
+    gap: 12px;
+    padding: 14px 18px;
+  }
+
+  .main-content .custom-card-window {
+    padding: 20px;
+  }
+
+  .metrics-grid {
+    gap: 8px;
+  }
+
+  .metric-card {
+    padding: 9px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  html, body {
+    overflow: auto !important;
+  }
+
+  .dashboard-container {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .dashboard-container .sidebar {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  .dashboard-container .main-content {
+    height: auto;
+    min-height: calc(100vh - 220px);
+    overflow: visible !important;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .window-tabs-navigation {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .tab-navigation-btn {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-header,
+  .header-right {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .header-right {
+    flex-wrap: wrap;
+  }
+
+  .custom-card-window {
+    padding: 16px;
+  }
+}
+
+/* Fixed desktop workspace: no document/page scrolling. */
+html, body {
+  overflow: hidden !important;
+}
+
+.dashboard-container {
+  display: flex !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.dashboard-container .sidebar {
+  height: 100vh !important;
+  overflow: hidden !important;
+}
+
+.dashboard-container .main-content {
+  height: 100vh !important;
+  min-height: 0 !important;
+  padding: clamp(12px, 1.35vw, 20px) !important;
+  gap: clamp(8px, 1vw, 15px) !important;
+  overflow: hidden !important;
+}
+
+.main-content .main-header {
+  min-height: 52px;
+  margin: 0 !important;
+}
+
+.main-content .metrics-grid {
+  gap: clamp(8px, .8vw, 12px);
+  margin: 0 !important;
+}
+
+.main-content .metric-card {
+  min-height: clamp(70px, 10vh, 102px);
+  padding: clamp(8px, .8vw, 12px);
+}
+
+.main-content .metric-icon {
+  width: clamp(30px, 2.4vw, 36px);
+  height: clamp(30px, 2.4vw, 36px);
+}
+
+.main-content .metric-info h3 {
+  font-size: clamp(14px, 1.25vw, 18px);
+}
+
+.main-content .window-tabs-navigation {
+  flex: 0 0 auto;
+  margin: 0 !important;
+  overflow: hidden;
+}
+
+.main-content .tab-navigation-btn {
+  padding: clamp(7px, .65vw, 10px) clamp(9px, 1vw, 18px);
+  font-size: clamp(11px, .9vw, 14px);
+}
+
+.main-content .custom-card-window {
+  flex: 0 1 auto;
+  max-height: min(58vh, 520px);
+  min-height: 0;
+  margin: 0;
+  padding: clamp(16px, 1.6vw, 28px);
+  overflow: hidden;
+}
+
+/* Long data stays usable without growing the page. */
+.main-content .custom-card-window .overflow-x-auto,
+.main-content .custom-card-window .table-container {
+  max-height: min(38vh, 340px);
+  overflow: auto;
+}
+
+@media (max-height: 760px) {
+  .main-content .header-left .welcome-text,
+  .main-content .header-left .role-sub,
+  .main-content .sub-stat {
+    display: none;
+  }
+
+  .main-content .main-header h2 {
+    font-size: 18px;
+  }
+
+  .main-content .custom-card-window {
+    max-height: min(54vh, 400px);
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    display: flex !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  .dashboard-container .sidebar {
+    width: 70px;
+    flex: 0 0 70px;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+    padding-inline: 8px;
+  }
+
+  .sidebar-brand > div,
+  .sidebar-menu .menu-category,
+  .sidebar-menu .menu-item:not(svg),
+  .sidebar-profile > * {
+    font-size: 0;
+  }
+
+  .sidebar-menu .menu-item {
+    justify-content: center;
+    padding-inline: 0;
+  }
+
+  .sidebar-menu .menu-item svg {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .main-content .metrics-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.card-window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-window-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Панель селекторів (Викладач / Рік) */
+.video-selectors-bar {
+  display: flex;
+  gap: 15px;
+  background-color: #f8fafc;
+  padding: 12px;
+  border-radius: var(--radius);
+  align-items: center;
+}
+
+.selector-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selector-item label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.selector-item select, .form-field select, .table-hours-input {
+  padding: 6px 12px;
+  font-size: 13px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background-color: #ffffff;
+  outline: none;
+  color: var(--text-main);
+  min-width: 180px;
+  transition: var(--transition);
+}
+
+.selector-item select:focus, .table-hours-input:focus {
+  border-color: var(--blue-brand);
+  box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.1);
+}
+
+/* --- ТАБЛИЦІ ДАНИХ (Workload Tables) --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+.workload-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+
+.workload-data-table th, .workload-data-table td {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.workload-data-table th {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.workload-data-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* --- СПЕЦИФІЧНІ СТИЛІ ДЛЯ ФОРМИ 56 --- */
+.form56-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  width: max-content;
+  min-width: 100%;
+}
+
+.form56-table th,
+.form56-table td {
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  padding: 10px 8px;
+}
+
+.form56-table .teacher-col,
+.form56-table .teacher-name-cell {
+  width: 180px !important;
+  min-width: 180px;
+  max-width: 180px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.form56-table .pos-col,
+.form56-table td:nth-child(2) {
+  width: 140px !important;
+  min-width: 140px;
+  max-width: 140px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.form56-table .rate-col,
+.form56-table td:nth-child(3) {
+  width: 80px !important;
+  min-width: 80px;
+  max-width: 80px;
+  text-align: center !important;
+}
+
+.form56-table th:not(.teacher-col):not(.pos-col):not(.rate-col):not(.total-col),
+.form56-table td:not(.teacher-name-cell):not(:nth-child(2)):not(:nth-child(3)):not(.total-cell-highlight) {
+  width: 75px;
+  min-width: 75px;
+  text-align: center !important;
+  font-feature-settings: "tnum";
+}
+
+.form56-table .total-col,
+.form56-table .total-cell-highlight {
+  width: 90px;
+  min-width: 90px;
+  font-weight: 700;
+  background-color: #f0fdf4;
+  color: #166534;
+  text-align: center !important;
+}
+
+.form56-table thead tr:last-child th {
+  font-size: 10.5px;
+  padding: 8px 4px;
+  background-color: #f8fafc;
+  font-weight: 600;
+}
+
+.form56-table th:first-child,
+.form56-table td:first-child {
+  position: sticky;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 11;
+  border-right: 2px solid #cbd5e1 !important;
+}
+
+.form56-table thead tr:first-child th:first-child {
+  background-color: #e2e8f0;
+  z-index: 13;
+}
+
+.form56-table thead tr:last-child th {
+  position: sticky;
+  top: 38px;
+  z-index: 10;
+}
+
+/* --- ЗАГАЛЬНІ СТИЛІ КЛАСІВ ТАБЛИЦЬ --- */
+.text-center { 
+  text-align: center !important; 
+  vertical-align: middle;
+}
+.text-right { 
+  text-align: right !important; 
+}
+.font-bold { font-weight: 700; }
+.font-medium { font-weight: 500; }
+
+.subject-cell {
+  color: #0f172a;
+}
+
+.total-highlight {
+  background-color: #f0fdf4;
+  color: #166534;
+  font-weight: 600;
+}
+
+/* --- БЛАНК ЗВІТУ (Printable Sheet) --- */
+.printable-report-sheet {
+  border: 1px dashed var(--border-color);
+  padding: 15px;
+  border-radius: var(--radius);
+  background-color: #fff;
+}
+
+.sheet-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.sheet-header h4 {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.sheet-header h3 {
+  font-size: 18px;
+  margin: 4px 0;
+  color: var(--blue-brand);
+}
+
+.teacher-meta-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* --- КНОПКИ (Buttons) --- */
+.btn-pdf-export, .btn-export, .btn-import-workload, .btn-save-workload, .btn-modal-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-pdf-export { background-color: #fee2e2; color: #991b1b; }
+.btn-pdf-export:hover { background-color: #fca5a5; }
+
+.btn-export { background-color: #dcfce7; color: #166534; }
+.btn-export:hover { background-color: #bbf7d0; }
+
+.btn-import-workload { background-color: #f1f5f9; color: #334155; border: 1px solid var(--border-color); }
+.btn-import-workload:hover { background-color: #e2e8f0; }
+
+.import-file-notice {
+  margin: -7px 0 0;
+  padding: 8px 12px;
+  border: 1px solid #bfdbfe;
+  border-radius: 7px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 12px;
+}
+
+.btn-save-workload, .btn-modal-next { background-color: var(--blue-brand); color: #ffffff; }
+.btn-save-workload:hover, .btn-modal-next:hover { background-color: var(--blue-brand-hover); }
+
+.btn-modal-cancel {
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.btn-modal-cancel:hover { background-color: #f1f5f9; color: var(--text-main); }
+
+.table-inner-btn {
+  background-color: #eff6ff;
+  color: var(--blue-brand);
+  border: 1px solid #bfdbfe;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.table-inner-btn:hover { background-color: var(--blue-brand); color: white; }
+
+/* --- МОДАЛЬНІ ВІКНА --- */
+.video-style-modal {
+  max-width: 440px;
+  margin: 40px auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.modal-inner-header {
+  background-color: #f8fafc;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+.modal-inner-header h3 { font-size: 15px; font-weight: 600; }
+
+.modal-inner-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.block-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.block-selector select { width: 100%; }
+
+.modal-buttons-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* --- ФОРМА ДОДАННЯ НАВАНТАЖЕННЯ --- */
+.distribution-step-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 700px;
+}
+
+.form-selectors-group {
+  display: flex;
+  gap: 15px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.form-field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.text-left-input {
+  text-align: left;
+  width: 100%;
+}
+
+.section-divider-title {
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+  margin-top: 10px;
+}
+
+.hours-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.hours-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hours-field label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.table-hours-input {
+  text-align: center;
+  min-width: auto;
+}
+
+.form-submit-zone {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Спінер завантаження */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: var(--blue-brand);
+  font-weight: 600;
+  padding: 40px 0;
+}
+
+/* --- АДАПТИВНІСТЬ --- */
+@media (max-width: 1024px) {
+  .dashboard-container { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; }
+  .main-content { height: auto; padding: 15px; }
+}
+
+/* --- СТИЛІ ДЛЯ КОРЕКТНОГО ДРУКУ (PDF) --- */
+@media print {
+  .sidebar, 
+  .main-header, 
+  .window-tabs-navigation, 
+  .video-selectors-bar, 
+  .card-window-header button, 
+  .metrics-grid {
+    display: none !important;
+  }
+  
+  .dashboard-container {
+    display: block !important;
+    background: #ffffff !important;
+  }
+  
+  .main-content {
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .custom-card-window {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  
+  .printable-report-sheet {
+    border: none !important;
+  }
+}

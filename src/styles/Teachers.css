@@ -1,0 +1,390 @@
+:root {
+  --bg-main: #f4f6fa;
+  --bg-card: #ffffff;
+  --text-primary: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  
+  --sidebar-bg: #0b192c;
+  --sidebar-text: #94a3b8;
+  --sidebar-text-white: #ffffff;
+  --sidebar-active: #2563eb;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  
+  --blue-brand: #2563eb;
+  --blue-hover: #1d4ed8;
+  --green-success: #10b981;
+  --orange-warn: #f59e0b;
+  --red-alert: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-main);
+}
+
+/* ЗАФІКСОВАНИЙ ЕКРАН */
+.dashboard-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ЛІВИЙ САЙДБАР */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--sidebar-border);
+  margin-bottom: 14px;
+}
+
+.sidebar-logo { width: 34px; height: 34px; }
+.sidebar-brand h3 { font-size: 14px; color: var(--sidebar-text-white); font-weight: 700; }
+.sidebar-brand p { font-size: 11px; color: var(--sidebar-text); }
+
+.sidebar-menu { display: flex; flex-direction: column; gap: 3px; flex-grow: 1; }
+.menu-category { font-size: 10px; text-transform: uppercase; color: #475569; margin: 14px 0 4px 8px; font-weight: 700; }
+.menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; color: var(--sidebar-text); text-decoration: none; border-radius: 6px; font-size: 12px; transition: 0.2s; }
+.menu-item:hover, .menu-item.active { background-color: var(--sidebar-active); color: var(--sidebar-text-white); }
+.badge { background: var(--blue-brand); padding: 1px 6px; border-radius: 10px; font-size: 10px; margin-left: auto; color: white; }
+
+.sidebar-profile { border-top: 1px solid var(--sidebar-border); padding-top: 12px; }
+.profile-info { display: flex; align-items: center; gap: 10px; color: white; margin-bottom: 10px; }
+.profile-avatar-placeholder { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; display: flex; align-items: center; }
+.profile-arrow { margin-left: auto; color: var(--sidebar-text); font-size: 12px; }
+.btn-logout { width: 100%; background: transparent; border: 1px solid var(--sidebar-border); color: var(--sidebar-text); padding: 7px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; }
+
+/* ГОЛОВНИЙ КОНТЕНТ */
+.main-content {
+  flex-grow: 1;
+  height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 12px;
+}
+
+/* ВЕРХНЯ ПАНЕЛЬ */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.main-header h2 { font-size: 20px; font-weight: 700; color: #0f172a; }
+.welcome-text { font-size: 12px; color: var(--text-muted); display: block; margin-top: 2px; }
+
+.header-right-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-right-buttons button {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+/* Навчальний рік та кастомні дати */
+.year-selector-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-right: 4px;
+}
+
+.header-year { 
+  font-size: 13px; 
+  font-weight: 700; 
+  color: #0f172a; 
+}
+
+.date-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.date-select {
+  height: 32px;
+  padding: 0 32px 0 14px;
+  font-size: 13px;
+  color: #64748b;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font-weight: 500;
+  outline: none;
+}
+
+.date-select:hover { border-color: #cbd5e1; }
+
+.date-select-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  font-size: 10px;
+  pointer-events: none;
+}
+
+.header-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border-color);
+  margin: 0 4px;
+}
+
+/* Кнопки дій */
+.btn-action-blue { 
+  background: #2563eb; 
+  color: white; 
+  border: none; 
+}
+.btn-action-blue:hover { background: #1d4ed8; }
+
+.btn-action-white { 
+  background: white; 
+  color: #2563eb; 
+  border: 1px solid #2563eb; 
+}
+.btn-action-white:hover { background: #f0f6ff; }
+
+.btn-action-blue-accent {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-action-blue-accent:hover { background: #059669; }
+
+/* МЕТРИКИ З ІКОНКАМИ */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.metric-card-flex {
+  background: var(--bg-card);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metric-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.purple-bg { background: #f3e8ff; color: #a855f7; }
+.green-bg { background: #d1fae5; color: #10b981; }
+.orange-bg { background: #ffedd5; color: #f97316; }
+.blue-bg { background: #dbeafe; color: #3b82f6; }
+.red-bg { background: #fee2e2; color: #ef4444; }
+
+.metric-card-flex p { font-size: 11px; color: var(--text-muted); }
+.metric-card-flex h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin: 1px 0; }
+.sub-stat { font-size: 10px; color: var(--text-muted); display: block; }
+.sub-red { color: var(--red-alert); font-weight: 500; }
+
+/* СЕРЕДНЯ РОБОЧА ЗОНА */
+.workspace-layout {
+  display: grid;
+  grid-template-columns: 1fr 290px;
+  gap: 12px;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.table-wrapper-card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Фільтри */
+.table-filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.search-input-wrapper { position: relative; width: 140px; flex-shrink: 0; }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 12px; }
+.search-input-wrapper input { width: 100%; height: 32px; padding-left: 28px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 12px; color: var(--text-primary); outline: none; }
+
+.filter-select-group { display: flex; gap: 6px; flex-grow: 1; }
+.select-labeled { display: flex; flex-direction: column; flex-grow: 1; }
+.select-labeled span { font-size: 9px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; text-transform: uppercase; }
+.select-labeled select { height: 26px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 11px; outline: none; background: #f8fafc; padding: 0 4px; }
+
+.btn-reset { background: none; border: none; color: var(--blue-brand); cursor: pointer; font-size: 12px; font-weight: 500; white-space: nowrap; }
+
+/* Контейнер таблиці */
+.table-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.workload-data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.workload-data-table th { position: sticky; top: 0; background: #f8fafc; z-index: 5; color: var(--text-muted); padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-color); font-weight: 600; }
+.workload-data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+.workload-data-table tbody tr:hover { background-color: #f8fafc; }
+
+.teacher-degree { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.hours-weight-cell { font-weight: 600; color: var(--text-primary); }
+
+/* Статуси */
+.badge-status { padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; display: inline-block; }
+.status-green { background: #d1fae5; color: #065f46; }
+.status-red { background: #fee2e2; color: #991b1b; }
+.status-orange { background: #fef3c7; color: #92400e; }
+
+.actions-cell-btns { display: flex; gap: 4px; justify-content: center; }
+.action-btn { background: white; border: 1px solid var(--border-color); padding: 5px; border-radius: 4px; cursor: pointer; color: var(--text-muted); }
+.action-btn.edit:hover { color: var(--blue-brand); border-color: var(--blue-brand); }
+.action-btn.delete:hover { color: var(--red-alert); border-color: var(--red-alert); }
+
+/* ПАГІНАЦІЯ (ОНОВЛЕНО) */
+.table-pagination-row { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-top: 10px; 
+  flex-shrink: 0; 
+  font-size: 12px; 
+}
+.pagination-left select { height: 24px; padding: 0 4px; border: 1px solid var(--border-color); border-radius: 4px; }
+.pagination-pages { display: flex; gap: 4px; }
+.page-num, .page-nav-btn { background: white; border: 1px solid var(--border-color); width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; border-radius: 4px; cursor: pointer; font-size: 12px; }
+.page-num.active { background: var(--blue-brand); color: white; border-color: var(--blue-brand); }
+
+/* ПРАВА ЧАСТИНА */
+.right-sidebar-container { display: flex; flex-direction: column; gap: 12px; }
+.side-card { background: white; border-radius: 8px; border: 1px solid var(--border-color); padding: 12px; }
+.side-card h3 { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+
+.chart-block { display: flex; align-items: center; gap: 10px; }
+.chart-container-box { width: 95px; height: 95px; position: relative; flex-shrink: 0; }
+.pie-center-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.pie-center-text h4 { font-size: 14px; font-weight: 700; }
+.pie-center-text p { font-size: 9px; color: var(--text-muted); }
+
+.side-chart-legend { list-style: none; flex-grow: 1; display: flex; flex-direction: column; gap: 3px; }
+.side-chart-legend li { display: flex; justify-content: space-between; font-size: 11px; }
+.legend-label { display: flex; align-items: center; gap: 4px; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+/* Алерти викладачів */
+.alerts-list { display: flex; flex-direction: column; gap: 6px; }
+.teacher-alert-row { display: flex; align-items: center; padding: 8px 10px; background: #fafafa; border-radius: 6px; border: 1px solid transparent; font-size: 11px; }
+.error-border { border-left: 4px solid var(--red-alert); }
+.warning-border { border-left: 4px solid var(--orange-warn); }
+.yellow-border { border-left: 4px solid #facc15; }
+
+.alert-bullet { width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; }
+.yellow-bg { background-color: #facc15; }
+.alert-text-main { font-weight: 500; color: #334155; }
+.alert-badge-count { margin-left: auto; font-weight: 600; }
+.red-text { color: var(--red-alert); }
+.orange-text { color: var(--orange-warn); }
+.yellow-text { color: #ca8a04; }
+
+/* НИЖНЯ ПАНЕЛЬ */
+.teachers-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.footer-card { background: white; border-radius: 8px; border: 1px solid var(--border-color); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; height: 115px; }
+.footer-card h3 { font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+
+/* Відповідність кваліфікації */
+.qualification-layout { display: flex; align-items: center; gap: 10px; position: relative; height: 100%; }
+.circular-chart { width: 50px; height: 50px; flex-shrink: 0; }
+.circle-bg { fill: none; stroke: #f1f5f9; stroke-width: 3.8; }
+.circle { fill: none; stroke: var(--blue-brand); stroke-width: 3.8; stroke-linecap: round; }
+.percentage { fill: #0f172a; font-size: 9px; font-weight: 700; text-anchor: middle; }
+.qualification-info-text { font-size: 11px; color: var(--text-muted); flex-grow: 1; }
+.mismatch-row { display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+.mismatch-title { font-size: 10px; font-weight: 600; color: var(--text-primary); }
+.tag-mismatch { background: #fee2e2; color: #991b1b; padding: 1px 4px; border-radius: 3px; font-size: 9px; font-weight: 600; }
+.btn-settings-outline { position: absolute; right: 0; bottom: 0; background: none; border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px; font-size: 10px; color: var(--text-primary); cursor: pointer; }
+
+/* Наукова активність */
+.activity-list-lines { display: flex; flex-direction: column; gap: 2px; }
+.activity-line { display: flex; justify-content: space-between; font-size: 11px; color: #334155; border-bottom: 1px dashed #f1f5f9; padding-bottom: 1px; }
+.activity-line strong { color: var(--text-primary); font-weight: 600; }
+.btn-footer-link { background: none; border: none; color: var(--blue-brand); font-size: 11px; font-weight: 500; cursor: pointer; text-align: left; margin-top: auto; align-self: flex-start; }
+
+/* Останні дії */
+.timeline-events { display: flex; flex-direction: column; gap: 4px; }
+.timeline-item { font-size: 11px; display: flex; gap: 6px; }
+.time-lbl { color: var(--text-muted); font-size: 10px; white-space: nowrap; }
+.timeline-item p { color: #334155; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

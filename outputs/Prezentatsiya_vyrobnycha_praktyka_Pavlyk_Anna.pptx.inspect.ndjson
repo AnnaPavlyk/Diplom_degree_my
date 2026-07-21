@@ -1,0 +1,224 @@
+{"kind":"deck","id":"pr/2h0li4","name":"Deck"}
+{"kind":"layout","layoutId":"9fa7bc9b-b24e-4992-a692-d742ff3c80cd","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"38e895c7-e878-486e-bd3c-7297934f882e","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/1gpd6j","slide":1,"title":"ЗВІТ З ВИРОБНИЧОЇ ПРАКТИКИ","textShapes":5}
+{"kind":"shape","id":"sh/q1orqlo7","slide":1,"bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/d4zqlgny","slide":1,"bbox":[72,72,10,410]}
+{"kind":"textbox","id":"sh/s3q9sb6d","slide":1,"text":"ЗВІТ З ВИРОБНИЧОЇ ПРАКТИКИ","textPreview":"ЗВІТ З ВИРОБНИЧОЇ ПРАКТИКИ","textChars":26,"textLines":1,"bbox":[118,108,900,70]}
+{"kind":"textbox","id":"sh/f6h8nq54","slide":1,"text":"Розроблення фронтенду вебсистеми розподілу навчального навантаження та інтеграція інтерфейсу з базою даних Supabase","textPreview":"Розроблення фронтенду вебсистеми розподілу навчального навантаження та інтеграція інтерфейсу з базою даних Supabase","textChars":115,"textLines":1,"bbox":[118,205,900,160]}
+{"kind":"textbox","id":"sh/e58ruloj","slide":1,"text":"Павлик Анна Михайлівна\nКомп’ютерні науки • 3 курс • група КН-23002б","textPreview":"Павлик Анна Михайлівна | Комп’ютерні науки • 3 курс • група КН-23002б","textChars":67,"textLines":2,"bbox":[118,415,850,100]}
+{"kind":"textbox","id":"sh/18zap0nu","slide":1,"text":"Керівник: асистент Олексій Степанов • Практику проводила: доцент, к.т.н. Белла Голуб","textPreview":"Керівник: асистент Олексій Степанов • Практику проводила: доцент, к.т.н. Белла Голуб","textChars":84,"textLines":1,"bbox":[118,560,950,55]}
+{"kind":"textbox","id":"sh/07q9wv69","slide":1,"text":"Виробнича практика • Павлик Анна Михайлівна • 1/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 1/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/1gpd6j","slide":1,"text":""}
+{"kind":"slide","id":"sl/ou5whm","slide":2,"title":"Мета та завдання практики","textShapes":6}
+{"kind":"shape","id":"sh/fyl0vu9s","slide":2,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/gzuhozad","slide":2,"text":"Мета та завдання практики","textPreview":"Мета та завдання практики","textChars":25,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/103ixkry","slide":2,"text":"Практика поєднала фронтенд-розроблення та інтеграцію з хмарною БД.","textPreview":"Практика поєднала фронтенд-розроблення та інтеграцію з хмарною БД.","textChars":66,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/21czqps3","slide":2,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/32l0zu9o","slide":2,"text":"Створити зрозумілий вебінтерфейс для роботи з навчальним навантаженням кафедри.","textPreview":"Створити зрозумілий вебінтерфейс для роботи з навчальним навантаженням кафедри.","textChars":79,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/o3uhszq9","slide":2,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/p43il4ru","slide":2,"text":"Реалізувати сторінки для викладачів, кафедри, дисциплін і навантаження.","textPreview":"Реалізувати сторінки для викладачів, кафедри, дисциплін і навантаження.","textChars":71,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/i58ze5sz","slide":2,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/j61gna9k","slide":2,"text":"Допомогти підключити інтерфейс до Supabase та організувати доступ за ролями.","textPreview":"Допомогти підключити інтерфейс до Supabase та організувати доступ за ролями.","textChars":76,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/rahonu9w","slide":2,"text":"Виробнича практика • Павлик Анна Михайлівна • 2/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 2/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/ou5whm","slide":2,"text":""}
+{"kind":"slide","id":"sl/1otjjh","slide":3,"title":"Проблема, яку вирішує система","textShapes":6}
+{"kind":"shape","id":"sh/ep8feh47","slide":3,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/lsje9wni","slide":3,"text":"Проблема, яку вирішує система","textPreview":"Проблема, яку вирішує система","textChars":29,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/0rqx0rmx","slide":3,"text":"Розрізнені файли й ручне коригування ускладнюють контроль навантаження.","textPreview":"Розрізнені файли й ручне коригування ускладнюють контроль навантаження.","textChars":71,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/rmhw3m5g","slide":3,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ql8fah4v","slide":3,"text":"Потрібен централізований перегляд викладачів, дисциплін і годин.","textPreview":"Потрібен централізований перегляд викладачів, дисциплін і годин.","textChars":64,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/doze5wnm","slide":3,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/cnqxcrm1","slide":3,"text":"Користувачам потрібні різні права доступу до одних і тих самих даних.","textPreview":"Користувачам потрібні різні права доступу до одних і тих самих даних.","textChars":69,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/3ixwz25k","slide":3,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/2xov6x4z","slide":3,"text":"Інтерфейс має бути зрозумілим навіть для працівників без технічної підготовки.","textPreview":"Інтерфейс має бути зрозумілим навіть для працівників без технічної підготовки.","textChars":78,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/sna5obi1","slide":3,"text":"Виробнича практика • Павлик Анна Михайлівна • 3/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 3/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/1otjjh","slide":3,"text":""}
+{"kind":"slide","id":"sl/3i6a8b","slide":4,"title":"Предметна область","textShapes":6}
+{"kind":"shape","id":"sh/fi14jypc","slide":4,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/0jals36h","slide":4,"text":"Предметна область","textPreview":"Предметна область","textChars":17,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/1kjml872","slide":4,"text":"Система підтримує робочі процеси кафедри комп’ютерних наук.","textPreview":"Система підтримує робочі процеси кафедри комп’ютерних наук.","textChars":59,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/qds3m9of","slide":4,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/re14fep0","slide":4,"text":"Облік викладачів, кафедр, дисциплін та навчального навантаження.","textPreview":"Облік викладачів, кафедр, дисциплін та навчального навантаження.","textChars":64,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/sfaloj6l","slide":4,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/dgjmho76","slide":4,"text":"Розподіл годин, вакансії, звіти та імпорт даних з Excel.","textPreview":"Розподіл годин, вакансії, звіти та імпорт даних з Excel.","textChars":56,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/a9cnydoz","slide":4,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/bal4rip4","slide":4,"text":"Контроль доступу до даних відповідно до ролі користувача.","textPreview":"Контроль доступу до даних відповідно до ролі користувача.","textChars":57,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/f2loz218","slide":4,"text":"Виробнича практика • Павлик Анна Михайлівна • 4/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 4/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/3i6a8b","slide":4,"text":""}
+{"kind":"slide","id":"sl/rdgkw5","slide":5,"title":"Обрана технологічна основа","textShapes":7}
+{"kind":"shape","id":"sh/ed0jelk3","slide":5,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/1gb2p0je","slide":5,"text":"Обрана технологічна основа","textPreview":"Обрана технологічна основа","textChars":26,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/0fi1gv29","slide":5,"text":"Компонентний фронтенд поєднано з Backend-as-a-Service.","textPreview":"Компонентний фронтенд поєднано з Backend-as-a-Service.","textChars":54,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/nitkrq1k","slide":5,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/mhkji5kz","slide":5,"text":"React — побудова інтерактивних сторінок і компонентів.","textPreview":"React — побудова інтерактивних сторінок і компонентів.","textChars":54,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/9kb2t0jq","slide":5,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/oj21kv25","slide":5,"text":"TypeScript — типізація даних та зменшення кількості помилок.","textPreview":"TypeScript — типізація даних та зменшення кількості помилок.","textChars":60,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/bmtkva1w","slide":5,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/alkjm5kb","slide":5,"text":"Tailwind CSS і CSS — адаптивне та узгоджене оформлення.","textPreview":"Tailwind CSS і CSS — адаптивне та узгоджене оформлення.","textChars":55,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"shape","id":"sh/szqp8jel","slide":5,"bbox":[80,414,12,12]}
+{"kind":"textbox","id":"sh/t0z61ov6","slide":5,"text":"Supabase — Auth, Postgres, REST API та політики RLS.","textPreview":"Supabase — Auth, Postgres, REST API та політики RLS.","textChars":52,"textLines":1,"bbox":[112,406,1030,48]}
+{"kind":"textbox","id":"sh/6x876twf","slide":5,"text":"Виробнича практика • Павлик Анна Михайлівна • 5/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 5/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/rdgkw5","slide":5,"text":""}
+{"kind":"slide","id":"sl/a98wvy","slide":6,"title":"Архітектура рішення","textShapes":7}
+{"kind":"shape","id":"sh/onmx0nu5","slide":6,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/nmdg7id0","slide":6,"text":"Архітектура рішення","textPreview":"Архітектура рішення","textChars":19,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/mlkfydwf","slide":6,"text":"Клієнтський застосунок взаємодіє з Supabase через захищені API.","textPreview":"Клієнтський застосунок взаємодіє з Supabase через захищені API.","textChars":63,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/xcvydsv2","slide":6,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/wbmh4nuh","slide":6,"text":"Користувач працює з React-застосунком у браузері.","textPreview":"Користувач працює з React-застосунком у браузері.","textChars":49,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/badgb2dw","slide":6,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/ap4f2xcb","slide":6,"text":"Supabase Auth створює сесію та передає роль у JWT.","textPreview":"Supabase Auth створює сесію та передає роль у JWT.","textChars":50,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/dgby18vi","slide":6,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/cf2xs3ed","slide":6,"text":"RLS-політики визначають дозволені операції з таблицями.","textPreview":"RLS-політики визначають дозволені операції з таблицями.","textChars":55,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"shape","id":"sh/i5wripcr","slide":6,"bbox":[80,414,12,12]}
+{"kind":"textbox","id":"sh/365srudc","slide":6,"text":"Дані відображаються в інтерфейсі після асинхронних запитів.","textPreview":"Дані відображаються в інтерфейсі після асинхронних запитів.","textChars":59,"textLines":1,"bbox":[112,406,1030,48]}
+{"kind":"textbox","id":"sh/47e9kzuh","slide":6,"text":"Виробнича практика • Павлик Анна Михайлівна • 6/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 6/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/a98wvy","slide":6,"text":""}
+{"kind":"slide","id":"sl/y1803m","slide":7,"title":"Єдина навігація системи","textShapes":7}
+{"kind":"shape","id":"sh/kny14fml","slide":7,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/zmpkbalg","slide":7,"text":"Єдина навігація системи","textPreview":"Єдина навігація системи","textChars":23,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/ylgj254v","slide":7,"text":"Ліва панель стала спільним компонентом усіх сторінок.","textPreview":"Ліва панель стала спільним компонентом усіх сторінок.","textChars":53,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/9sr2hk3i","slide":7,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/8ril8f2x","slide":7,"text":"Головна — огляд основних показників кафедри.","textPreview":"Головна — огляд основних показників кафедри.","textChars":44,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/7q9kfalc","slide":7,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/mp03654r","slide":7,"text":"Навантаження — розподіл годин, вакансії, звіти та дисципліни.","textPreview":"Навантаження — розподіл годин, вакансії, звіти та дисципліни.","textChars":61,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/hgb2lk3e","slide":7,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/wf2lcz2t","slide":7,"text":"Викладачі — перегляд і редагування кадрових даних.","textPreview":"Викладачі — перегляд і редагування кадрових даних.","textChars":50,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"shape","id":"sh/ehkjexk3","slide":7,"bbox":[80,414,12,12]}
+{"kind":"textbox","id":"sh/fitk721o","slide":7,"text":"Кафедра — пошук та редагування контактної інформації.","textPreview":"Кафедра — пошук та редагування контактної інформації.","textChars":53,"textLines":1,"bbox":[112,406,1030,48]}
+{"kind":"textbox","id":"sh/0321gn29","slide":7,"text":"Виробнича практика • Павлик Анна Михайлівна • 7/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 7/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/y1803m","slide":7,"text":""}
+{"kind":"slide","id":"sl/l0tkmg","slide":8,"title":"Головна сторінка","textShapes":6}
+{"kind":"shape","id":"sh/tozq14fi","slide":8,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/6187qpw7","slide":8,"text":"Головна сторінка","textPreview":"Головна сторінка","textChars":16,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/72h8zuxc","slide":8,"text":"Головна концентрує ключові показники для швидкого огляду.","textPreview":"Головна концентрує ключові показники для швидкого огляду.","textChars":57,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/kz6p4fe1","slide":8,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/l0fqxkfm","slide":8,"text":"Статистичні картки відображають кількість викладачів, годин і дисциплін.","textPreview":"Статистичні картки відображають кількість викладачів, годин і дисциплін.","textChars":72,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/yxo725wv","slide":8,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/jyx8vaxg","slide":8,"text":"Аналітичні діаграми доступні завідувачу кафедри.","textPreview":"Аналітичні діаграми доступні завідувачу кафедри.","textChars":48,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/4va90je5","slide":8,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/pwjq9ovq","slide":8,"text":"Для інших ролей аналітика прихована, але базова навігація збережена.","textPreview":"Для інших ролей аналітика прихована, але базова навігація збережена.","textChars":68,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/lcnylk3y","slide":8,"text":"Виробнича практика • Павлик Анна Михайлівна • 8/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 8/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/l0tkmg","slide":8,"text":""}
+{"kind":"slide","id":"sl/s6l0yy","slide":9,"title":"Сторінка «Навантаження»","textShapes":6}
+{"kind":"shape","id":"sh/neho7epo","slide":9,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/8fq5gjqt","slide":9,"text":"Сторінка «Навантаження»","textPreview":"Сторінка «Навантаження»","textChars":23,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/9gj69o7e","slide":9,"text":"Розділ об’єднує щоденні операції з навчальним навантаженням.","textPreview":"Розділ об’єднує щоденні операції з навчальним навантаженням.","textChars":60,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/y98nap8r","slide":9,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/zaho3upc","slide":9,"text":"Вкладки: розподіл годин, звіт викладача, зведення кафедри, вакансії, дисципліни.","textPreview":"Вкладки: розподіл годин, звіт викладача, зведення кафедри, вакансії, дисципліни.","textChars":80,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/0bq5czqx","slide":9,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/lcz6547i","slide":9,"text":"Вибір навчального року та форми навчання впливає на дані запиту.","textPreview":"Вибір навчального року та форми навчання впливає на дані запиту.","textChars":64,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/i5s7mt8b","slide":9,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/j61ofypw","slide":9,"text":"Інтерфейс оптимізовано для різних розмірів робочого вікна.","textPreview":"Інтерфейс оптимізовано для різних розмірів робочого вікна.","textChars":58,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/jmd4bqlg","slide":9,"text":"Виробнича практика • Павлик Анна Михайлівна • 9/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 9/18","textChars":50,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/s6l0yy","slide":9,"text":""}
+{"kind":"slide","id":"sl/bo5h3r","slide":10,"title":"Робота з викладачами","textShapes":6}
+{"kind":"shape","id":"sh/32xkfq1g","slide":10,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/436l8vi1","slide":10,"text":"Робота з викладачами","textPreview":"Робота з викладачами","textChars":20,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/p4f2hgjm","slide":10,"text":"Інтерфейс підтримує класичний сценарій кадрового обліку.","textPreview":"Інтерфейс підтримує класичний сценарій кадрового обліку.","textChars":56,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/q5o3al07","slide":10,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/r6hkjq1s","slide":10,"text":"Випадаюче меню містить додавання, редагування, перегляд і поновлення.","textPreview":"Випадаюче меню містить додавання, редагування, перегляд і поновлення.","textChars":69,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/c7qlcvid","slide":10,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/d8z2l0jy","slide":10,"text":"Перегляд працівників доступний за категоріями: усі, основні, сумісники.","textPreview":"Перегляд працівників доступний за категоріями: усі, основні, сумісники.","textChars":71,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/694jy103","slide":10,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/7adk761o","slide":10,"text":"Для ролі лаборанта доступне збереження змін у таблиці «Викладач».","textPreview":"Для ролі лаборанта доступне збереження змін у таблиці «Викладач».","textChars":65,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/rah4r61s","slide":10,"text":"Виробнича практика • Павлик Анна Михайлівна • 10/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 10/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/bo5h3r","slide":10,"text":""}
+{"kind":"slide","id":"sl/yfhwa4","slide":11,"title":"Дані кафедри та дисципліни","textShapes":6}
+{"kind":"shape","id":"sh/zqhcz2hc","slide":11,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/krqds7yx","slide":11,"text":"Дані кафедри та дисципліни","textPreview":"Дані кафедри та дисципліни","textChars":26,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/lcze1cz2","slide":11,"text":"Довідники пов’язані через зовнішні ключі бази даних.","textPreview":"Довідники пов’язані через зовнішні ключі бази даних.","textChars":52,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/alovmxgf","slide":11,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/bmxcv2h0","slide":11,"text":"Кафедру можна знайти за кодом або назвою та відредагувати її дані.","textPreview":"Кафедру можна знайти за кодом або назвою та відредагувати її дані.","textChars":66,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/cn6do7yl","slide":11,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/xofuxcz6","slide":11,"text":"Дисципліна посилається на код кафедри, тому код має існувати в таблиці «Кафедра».","textPreview":"Дисципліна посилається на код кафедри, тому код має існувати в таблиці «Кафедра».","textChars":81,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/2h4vixgj","slide":11,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/nixcrih4","slide":11,"text":"Повідомлення інтерфейсу пояснюють помилки обмежень БД.","textPreview":"Повідомлення інтерфейсу пояснюють помилки обмежень БД.","textChars":54,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/na5kbal8","slide":11,"text":"Виробнича практика • Павлик Анна Михайлівна • 11/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 11/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/yfhwa4","slide":11,"text":""}
+{"kind":"slide","id":"sl/iwc9nx","slide":12,"title":"Імпорт даних з Excel","textShapes":6}
+{"kind":"shape","id":"sh/c7yl8fet","slide":12,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/r6p4zux8","slide":12,"text":"Імпорт даних з Excel","textPreview":"Імпорт даних з Excel","textChars":20,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/q5g36pwn","slide":12,"text":"Завантаження навчального плану зменшує обсяг ручного введення.","textPreview":"Завантаження навчального плану зменшує обсяг ручного введення.","textChars":62,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/p47mxkf2","slide":12,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/43yl4fex","slide":12,"text":"Користувач вибирає файл з локального комп’ютера.","textPreview":"Користувач вибирає файл з локального комп’ютера.","textChars":48,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/32p4vaxc","slide":12,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/21w325wr","slide":12,"text":"Застосунок аналізує аркуш і готує дисципліни та години до запису.","textPreview":"Застосунок аналізує аркуш і готує дисципліни та години до запису.","textChars":65,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/h0n2t0f6","slide":12,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/gzel0vel","slide":12,"text":"Перед збереженням перевіряються обов’язкові поля й формат даних.","textPreview":"Перед збереженням перевіряються обов’язкові поля й формат даних.","textChars":64,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/e1k72psz","slide":12,"text":"Виробнича практика • Павлик Анна Михайлівна • 12/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 12/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/iwc9nx","slide":12,"text":""}
+{"kind":"slide","id":"sl/whfnxo","slide":13,"title":"Інтеграція з Supabase","textShapes":6}
+{"kind":"shape","id":"sh/g32tsvul","slide":13,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/f2tsjqt0","slide":13,"text":"Інтеграція з Supabase","textPreview":"Інтеграція з Supabase","textChars":21,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/u1kbqlcv","slide":13,"text":"Використано реальні запити до таблиць і керування станами.","textPreview":"Використано реальні запити до таблиць і керування станами.","textChars":58,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/psvup0bi","slide":13,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/4rmtwvux","slide":13,"text":"Завантаження даних виконується через select, фільтрацію та сортування.","textPreview":"Завантаження даних виконується через select, фільтрацію та сортування.","textChars":70,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/3qdcnqtc","slide":13,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/2pkbu5cr","slide":13,"text":"Зміни зберігаються через insert, update або upsert.","textPreview":"Зміни зберігаються через insert, update або upsert.","textChars":51,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/5wradgby","slide":13,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/kvitkbud","slide":13,"text":"Для кожного запиту передбачено стани loading та error.","textPreview":"Для кожного запиту передбачено стани loading та error.","textChars":54,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/qt4n6d8v","slide":13,"text":"Виробнича практика • Павлик Анна Михайлівна • 13/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 13/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/whfnxo","slide":13,"text":""}
+{"kind":"slide","id":"sl/0mn43y","slide":14,"title":"Авторизація користувачів","textShapes":6}
+{"kind":"shape","id":"sh/xcb21kfa","slide":14,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/a90365wj","slide":14,"text":"Авторизація користувачів","textPreview":"Авторизація користувачів","textChars":24,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/ba9kzax4","slide":14,"text":"Вхід реалізовано через Supabase Auth, а не лише через локальний стан.","textPreview":"Вхід реалізовано через Supabase Auth, а не лише через локальний стан.","textChars":69,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/o7il4fed","slide":14,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/98r2x0fy","slide":14,"text":"Користувач входить за email і паролем облікового запису Supabase.","textPreview":"Користувач входить за email і паролем облікового запису Supabase.","textChars":65,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/m50325wn","slide":14,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/n69kvaxs","slide":14,"text":"Роль береться з app_metadata користувача.","textPreview":"Роль береться з app_metadata користувача.","textChars":41,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/83mlgzex","slide":14,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/t4vm94v2","slide":14,"text":"Опція «Запам’ятати мене» зберігає сесію та email без збереження пароля відкритим текстом.","textPreview":"Опція «Запам’ятати мене» зберігає сесію та email без збереження пароля відкритим текстом.","textChars":89,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/p47m1k3u","slide":14,"text":"Виробнича практика • Павлик Анна Михайлівна • 14/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 14/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/0mn43y","slide":14,"text":""}
+{"kind":"slide","id":"sl/8p8ydh","slide":15,"title":"Розмежування прав доступу","textShapes":7}
+{"kind":"shape","id":"sh/zixg3id8","slide":15,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/kj6hc3et","slide":15,"text":"Розмежування прав доступу","textPreview":"Розмежування прав доступу","textChars":25,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/lkfy58vy","slide":15,"text":"RLS-політики захищають дані безпосередньо на рівні БД.","textPreview":"RLS-політики захищають дані безпосередньо на рівні БД.","textChars":54,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/mlozedwj","slide":15,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/7mx07id4","slide":15,"text":"admin має повний доступ до даних.","textPreview":"admin має повний доступ до даних.","textChars":33,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/8nqhgnep","slide":15,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/9ozi9sva","slide":15,"text":"head переглядає дані та аналітику без редагування.","textPreview":"head переглядає дані та аналітику без редагування.","textChars":50,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/2p4z2twf","slide":15,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/nqdgved0","slide":15,"text":"laborant редагує кафедральні довідники, навантаження й викладачів.","textPreview":"laborant редагує кафедральні довідники, навантаження й викладачів.","textChars":66,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"shape","id":"sh/7etk7epg","slide":15,"bbox":[80,414,12,12]}
+{"kind":"textbox","id":"sh/6dkje9ov","slide":15,"text":"teacher працює з доступними документами та даними.","textPreview":"teacher працює з доступними документами та даними.","textChars":50,"textLines":1,"bbox":[112,406,1030,48]}
+{"kind":"textbox","id":"sh/tgb2947m","slide":15,"text":"Виробнича практика • Павлик Анна Михайлівна • 15/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 15/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/8p8ydh","slide":15,"text":""}
+{"kind":"slide","id":"sl/0sfcux","slide":16,"title":"Тестування результату","textShapes":6}
+{"kind":"shape","id":"sh/velcrq58","slide":16,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/wfedkvmt","slide":16,"text":"Тестування результату","textPreview":"Тестування результату","textChars":21,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/hgnut0ne","slide":16,"text":"Перевірка охопила сценарії роботи різних ролей і сторінок.","textPreview":"Перевірка охопила сценарії роботи різних ролей і сторінок.","textChars":58,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/ihwvm54z","slide":16,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/ji5cvq5k","slide":16,"text":"Перевірено вхід, відновлення сесії та відображення профілю.","textPreview":"Перевірено вхід, відновлення сесії та відображення профілю.","textChars":59,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/4jedovm5","slide":16,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/5knux0na","slide":16,"text":"Перевірено навігацію, пошук кафедри, таблиці та форми редагування.","textPreview":"Перевірено навігацію, пошук кафедри, таблиці та форми редагування.","textChars":66,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/6lwvq54v","slide":16,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/r65cza5g","slide":16,"text":"Перевірено повідомлення про помилки RLS і зовнішніх ключів.","textPreview":"Перевірено повідомлення про помилки RLS і зовнішніх ключів.","textChars":59,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/j25knep8","slide":16,"text":"Виробнича практика • Павлик Анна Михайлівна • 16/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 16/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/0sfcux","slide":16,"text":""}
+{"kind":"slide","id":"sl/6za28l","slide":17,"title":"Практична цінність","textShapes":6}
+{"kind":"shape","id":"sh/vuh8vet8","slide":17,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/gvq9ojut","slide":17,"text":"Практична цінність","textPreview":"Практична цінність","textChars":18,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/hwjqxobe","slide":17,"text":"Система створює основу для централізованого керування даними кафедри.","textPreview":"Система створює основу для централізованого керування даними кафедри.","textChars":69,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/ixsrqtcz","slide":17,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/3y18zetk","slide":17,"text":"Зменшується кількість ручних операцій і ризик дублювання інформації.","textPreview":"Зменшується кількість ручних операцій і ризик дублювання інформації.","textChars":68,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/4za9sjup","slide":17,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/50jq1oba","slide":17,"text":"Працівники бачать лише ті функції, які відповідають їхнім повноваженням.","textPreview":"Працівники бачать лише ті функції, які відповідають їхнім повноваженням.","textChars":72,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/q1srutcv","slide":17,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/r21s3ytg","slide":17,"text":"Рішення можна розширити автоматичним розподілом годин і новими звітами.","textPreview":"Рішення можна розширити автоматичним розподілом годин і новими звітами.","textChars":71,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/nix4z6dw","slide":17,"text":"Виробнича практика • Павлик Анна Михайлівна • 17/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 17/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/6za28l","slide":17,"text":""}
+{"kind":"slide","id":"sl/u6kzpy","slide":18,"title":"Висновки","textShapes":6}
+{"kind":"shape","id":"sh/hkfmdgjy","slide":18,"bbox":[0,0,1280,18]}
+{"kind":"textbox","id":"sh/uho32lkn","slide":18,"text":"Висновки","textPreview":"Висновки","textChars":8,"textLines":1,"bbox":[72,52,1136,50]}
+{"kind":"textbox","id":"sh/fix4b6ls","slide":18,"text":"Мета виробничої практики досягнута: створено робочий фронтенд і основу інтеграції з БД.","textPreview":"Мета виробничої практики досягнута: створено робочий фронтенд і основу інтеграції з БД.","textChars":87,"textLines":1,"bbox":[72,111,980,40]}
+{"kind":"shape","id":"sh/sf6l0b2h","slide":18,"bbox":[80,198,12,12]}
+{"kind":"textbox","id":"sh/tgf29g32","slide":18,"text":"Реалізовано сучасний інтерфейс вебсистеми розподілу навчального навантаження.","textPreview":"Реалізовано сучасний інтерфейс вебсистеми розподілу навчального навантаження.","textChars":77,"textLines":1,"bbox":[112,190,1030,48]}
+{"kind":"shape","id":"sh/6d43y1kb","slide":18,"bbox":[80,270,12,12]}
+{"kind":"textbox","id":"sh/7exk76lw","slide":18,"text":"Налаштовано взаємодію з Supabase, ролі користувачів і RLS-політики.","textPreview":"Налаштовано взаємодію з Supabase, ролі користувачів і RLS-політики.","textChars":67,"textLines":1,"bbox":[112,262,1030,48]}
+{"kind":"shape","id":"sh/kbmlwr25","slide":18,"bbox":[80,342,12,12]}
+{"kind":"textbox","id":"sh/5cv25w3q","slide":18,"text":"Розроблена система готова до подальшого наповнення даними та функціонального розвитку.","textPreview":"Розроблена система готова до подальшого наповнення даними та функціонального розвитку.","textChars":86,"textLines":1,"bbox":[112,334,1030,48]}
+{"kind":"textbox","id":"sh/14vq1wje","slide":18,"text":"Виробнича практика • Павлик Анна Михайлівна • 18/18","textPreview":"Виробнича практика • Павлик Анна Михайлівна • 18/18","textChars":51,"textLines":1,"bbox":[72,680,1136,20]}
+{"kind":"notes","id":"nt/u6kzpy","slide":18,"text":""}

@@ -1,0 +1,258 @@
+/* --- СТРИКТНЕ ПРАВИЛО: ГОЛОВНИЙ ЕКРАН БІЛЬШЕ НЕ ГОРТАЄТЬСЯ В БРАУЗЕРІ --- */
+.dashboard-container.non-scrollable-page {
+  height: 100vh;
+  overflow: hidden; 
+  display: flex;
+}
+
+.main-content {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+}
+
+/* ФІКСОВАНА СТРУКТУРА КОНТЕНТНОЇ ЗОНИ ДОВІДКИ */
+.help-fixed-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden; 
+  margin-bottom: 16px;
+  height: calc(100vh - 160px); 
+}
+
+/* ГОРИЗОНТАЛЬНА НАВІГАЦІЯ НА 5 ТАБІВ */
+.help-tabs-nav {
+  display: flex;
+  gap: 6px;
+  background: #f1f5f9;
+  padding: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tab-nav-btn {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-nav-btn.active {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.08);
+}
+
+.tab-nav-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.6);
+  color: #0f172a;
+}
+
+/* ЗОНА ПЕРЕГЛЯДУ З ОKРЕМИМ ВНУТРІШНІМ СКРОЛОМ ТІЛЬКИ ДЛЯ ТАБЛИЦЬ */
+.help-tab-viewport {
+  flex: 1;
+  overflow-y: auto; 
+  padding: 24px;
+  background: #ffffff;
+}
+
+.tab-content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Анімація плавної появи вмісту при перемиканні */
+.tab-content-animate {
+  animation: fadeInHelpView 0.25s ease-out forwards;
+}
+
+@keyframes fadeInHelpView {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ПОКРОКОВІ КАРТКИ ДЛЯ РЕЄСТРАЦІЇ */
+.registration-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.reg-step-card {
+  background: #f8fafc;
+  border-left: 4px solid #ec4899;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.reg-step-card h4 {
+  margin: 0 0 8px 0;
+  color: #0f172a;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reg-step-card p {
+  margin: 0 0 12px 0;
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.5;
+}
+
+/* ТАБЛИЦЯ РОЛЕЙ ТА ПРАВ ДОСТУПУ */
+.role-rights-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 13px;
+}
+
+.role-rights-table th {
+  background: #f1f5f9;
+  color: #334155;
+  padding: 10px 14px;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.role-rights-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.role-rights-table tr:last-child td {
+  border-bottom: none;
+}
+
+.role-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 11px;
+}
+.role-admin { background: #dbeafe; color: #1e40af; }
+.role-assistant { background: #e0f2fe; color: #0369a1; }
+.role-teacher { background: #fef3c7; color: #92400e; }
+
+/* СТИЛІ ІНТЕРАКТИВНИХ ТАБЛИЦЬ (ВКЛАДКИ 2-5) */
+.guide-table-responsive {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.guide-interactive-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.guide-interactive-table th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+  padding: 14px 18px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.guide-interactive-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.guide-interactive-table tr:last-child td {
+  border-bottom: none;
+}
+
+.guide-interactive-table tr:hover td {
+  background: #f8fafc;
+}
+
+/* ІЗОЛЬОВАНІ КЛАСИ ДЛЯ ІКОНОК */
+.help-tab-viewport .sec-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+}
+.help-tab-viewport .icon-auth { color: #ec4899 !important; background: #fdf2f8 !important; }
+.help-tab-viewport .icon-dashboard { color: #0ea5e9 !important; background: #f0f9ff !important; }
+.help-tab-viewport .icon-workload { color: #2563eb !important; background: #eff6ff !important; }
+.help-tab-viewport .icon-teachers { color: #10b981 !important; background: #f0fdf4 !important; }
+.help-tab-viewport .icon-disciplines { color: #8b5cf6 !important; background: #f5f3ff !important; }
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.section-title-row h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.section-desc {
+  margin: 0 0 16px 0;
+  color: #64748b;
+  font-size: 13.5px;
+}
+
+.tag-status {
+  display: inline-block;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.over-tag { background: #fee2e2; color: #991b1b; }
+
+code {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12.5px;
+}

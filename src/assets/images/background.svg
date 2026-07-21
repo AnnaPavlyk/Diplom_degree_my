@@ -1,0 +1,76 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#F8FBFF"/>
+        <stop offset="1" stop-color="#EEF4FF"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#A7B9D9" flood-opacity="0.25"/>
+    </filter>
+</defs>
+
+<rect width="1600" height="900" fill="url(#bg)"/>
+
+<!-- Abstract waves -->
+<path d="M0 760C180 690 320 710 500 760C680 810 840 850 1060 790C1280 730 1450 710 1600 770V900H0V760Z" fill="#DDE9FF"/>
+<path d="M0 810C220 750 420 790 620 840C820 890 1080 880 1300 820C1450 780 1540 770 1600 790V900H0V810Z" fill="#CFE0FF"/>
+
+<!-- Decorative network -->
+<g opacity="0.4" stroke="#8FB0F5" stroke-width="2">
+    <line x1="980" y1="120" x2="1180" y2="180"/>
+    <line x1="1180" y1="180" x2="1320" y2="120"/>
+    <line x1="1180" y1="180" x2="1260" y2="280"/>
+    <line x1="980" y1="120" x2="1080" y2="300"/>
+    <circle cx="980" cy="120" r="8" fill="#8FB0F5"/>
+    <circle cx="1180" cy="180" r="8" fill="#8FB0F5"/>
+    <circle cx="1320" cy="120" r="8" fill="#8FB0F5"/>
+    <circle cx="1260" cy="280" r="8" fill="#8FB0F5"/>
+    <circle cx="1080" cy="300" r="8" fill="#8FB0F5"/>
+</g>
+
+<!-- Books -->
+<g filter="url(#shadow)">
+    <rect x="180" y="500" width="220" height="50" rx="10" fill="#1D5DDA"/>
+    <rect x="170" y="550" width="240" height="50" rx="10" fill="#20A05B"/>
+    <rect x="160" y="600" width="260" height="50" rx="10" fill="#F0C330"/>
+
+    <text x="210" y="533" font-size="26" fill="white" font-family="Arial" font-weight="700">АГРОНОМІЯ</text>
+    <text x="200" y="583" font-size="26" fill="white" font-family="Arial" font-weight="700">ЕКОНОМІКА</text>
+    <text x="190" y="633" font-size="26" fill="#1D5DDA" font-family="Arial" font-weight="700">БІОЛОГІЯ</text>
+</g>
+
+<!-- Laptop -->
+<g filter="url(#shadow)">
+    <rect x="520" y="300" width="520" height="320" rx="18" fill="#1A1A1A"/>
+    <rect x="540" y="320" width="480" height="280" rx="10" fill="#F7FAFF"/>
+
+    <!-- Dashboard -->
+    <rect x="540" y="320" width="120" height="280" fill="#0F3B99"/>
+    <rect x="680" y="350" width="130" height="70" rx="12" fill="#FFFFFF"/>
+    <rect x="830" y="350" width="130" height="70" rx="12" fill="#FFFFFF"/>
+    <rect x="680" y="440" width="280" height="120" rx="12" fill="#FFFFFF"/>
+
+    <polyline points="710,530 760,500 810,470 860,430 920,390"
+        fill="none" stroke="#76A8FF" stroke-width="8"/>
+
+    <rect x="480" y="620" width="600" height="30" rx="14" fill="#BFC8D9"/>
+</g>
+
+<!-- Microscope -->
+<g filter="url(#shadow)">
+    <rect x="1230" y="590" width="120" height="28" rx="12" fill="#1D5DDA"/>
+    <path d="M1280 350C1320 350 1350 390 1350 440V570" stroke="#D8DDE8" stroke-width="30" fill="none"/>
+    <rect x="1240" y="520" width="120" height="20" rx="10" fill="#2E2E2E"/>
+    <rect x="1265" y="300" width="40" height="130" rx="18" fill="#F8F8F8"/>
+    <circle cx="1315" cy="430" r="22" fill="#2E2E2E"/>
+    <rect x="1280" y="260" width="28" height="55" rx="12" fill="#111"/>
+</g>
+
+<!-- Cup -->
+<g filter="url(#shadow)">
+    <rect x="1180" y="620" width="90" height="100" rx="12" fill="white"/>
+    <path d="M1270 650C1300 650 1300 700 1270 700" stroke="#C9D4E8" stroke-width="10" fill="none"/>
+</g>
+
+</svg>
