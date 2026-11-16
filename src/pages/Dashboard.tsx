@@ -64,6 +64,7 @@ function Dashboard({ departmentName = "Кафедра комп'ютерних н
   const navigate = useNavigate(); 
   const [role, setRole] = useState<string>(() => localStorage.getItem("userRole") ?? "Лаборант");
   const [profileName] = useState(currentUserName);
+  const [academicYear, setAcademicYear] = useState("2025/2026");
 
   useEffect(() => {
     const savedRole = localStorage.getItem("userRole");
@@ -166,10 +167,14 @@ function Dashboard({ departmentName = "Кафедра комп'ютерних н
               <FaBell />
               <span className="dot"></span>
             </div>
-            <div className="academic-year">
-              <strong>2025/2026 навчальний рік</strong>
-              <div className="date-badge">01.09.2025 - 31.05.2026 <FaChevronDown /></div>
-            </div>
+            <label className="academic-year">
+              <strong>{academicYear} навчальний рік</strong>
+              <select className="date-badge" value={academicYear} onChange={(event) => setAcademicYear(event.target.value)} aria-label="Оберіть навчальний рік">
+                <option value="2024/2025">2024/2025 навч. рік</option>
+                <option value="2025/2026">2025/2026 навч. рік</option>
+                <option value="2026/2027">2026/2027 навч. рік</option>
+              </select>
+            </label>
           </div>
         </header>
 

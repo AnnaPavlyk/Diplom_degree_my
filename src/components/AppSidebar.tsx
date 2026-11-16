@@ -18,9 +18,9 @@ export default function AppSidebar({ active }: { active: Section }) {
     <nav className="app-sidebar-nav">
       <button className={active === "dashboard" ? "active" : ""} onClick={() => go("/dashboard")}><FiHome /> Головна</button>
       <span>УПРАВЛІННЯ</span>
-      <button className={active === "workload" || active === "disciplines" ? "active" : ""} onClick={() => go("/workload")}><FiBookOpen /> Навантаження</button>
-      <button className={active === "teachers" ? "active" : ""} onClick={() => go("/teachers")}><FiUsers /> Викладачі</button>
       <button className={active === "department" ? "active" : ""} onClick={() => go("/department")}><FiHome /> Кафедра</button>
+      <button className={active === "teachers" ? "active" : ""} onClick={() => go("/teachers")}><FiUsers /> Викладачі</button>
+      <button className={active === "workload" || active === "disciplines" ? "active" : ""} onClick={() => go("/workload")}><FiBookOpen /> Навантаження</button>
       <span>ДОДАТКОВО</span>
       <button className={active === "help" ? "active" : ""} onClick={() => go("/help")}><FiHelpCircle /> Довідка</button>
     </nav>

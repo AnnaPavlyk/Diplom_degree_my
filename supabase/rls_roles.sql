@@ -7,7 +7,23 @@ create or replace function public.current_app_role()
 returns text
 language sql
 stable
-as $$ select coalesce(auth.jwt() -> 'app_metadata' ->> 'role', '') $$;
+as $$
+  -- У застосунку історично використовувались і англійські коди (`lab`,
+  -- `laborant`), і українські назви ролей. RLS має працювати з усіма цими
+  -- варіантами, інакше авторизований лаборант бачить дані, але його INSERT /
+  -- UPDATE відсіюється політикою.
+  select case lower(trim(coalesce(auth.jwt() -> 'app_metadata' ->> 'role', auth.jwt() -> 'user_metadata' ->> 'role', '')))
+    when 'admin' then 'admin'
+    when 'head' then 'head'
+    when 'завідувач кафедри' then 'head'
+    when 'lab' then 'laborant'
+    when 'laborant' then 'laborant'
+    when 'лаборант' then 'laborant'
+    when 'teacher' then 'teacher'
+    when 'викладач' then 'teacher'
+    else ''
+  end
+$$;
 
 create or replace function public.has_app_role(allowed_roles text[])
 returns boolean
@@ -15,20 +31,28 @@ language sql
 stable
 as $$ select public.current_app_role() = any(allowed_roles) $$;
 
+-- RLS-політика не замінює звичайні права PostgreSQL. Ці права дозволяють
+-- авторизованому користувачу читати довідники, а обмеження дій лишаються
+-- у політиках нижче. Без GRANT застосунок може бачити порожні списки навіть
+-- тоді, коли таблиці заповнені.
+grant usage on schema public to authenticated;
+grant select on table public."Посада", public."Тип_викладача", public."Статус_викладача", public."Навантаження" to authenticated;
+grant select, insert, update, delete on table public."Викладач", public."Кафедральна_інформація_про_виклад", public."Архів" to authenticated;
+
 -- Вмикаємо RLS лише на таблицях, які реально існують у схемі.
 -- Так файл не впаде, якщо у назві таблиці у вашій БД використано пробіл замість підкреслення.
 do $$
 declare
   table_name text;
   managed_tables text[] := array[
-    'Архів', 'Навантаження', 'Кафедральна_інформація', 'Завантаження_навантаження',
+    'Архів', 'Навантаження', 'Кафедральна_інформація_про_виклад', 'Завантаження_навантаження', 'Розподіл_навчального_навантаження',
     'Дисципліни', 'Посада', 'Статус_викладача', 'Тип_викладача', 'Форма_навчання',
     'Рівень_навчання', 'Завантажені_документи', 'Кафедра', 'Викладач',
     'Факультет_ННІ', 'Абревіатура', 'ОПП', 'Спеціальність'
   ];
   documents_tables text[] := array['Завантажені_документи'];
   laborant_write_tables text[] := array[
-    'Архів', 'Навантаження', 'Кафедральна_інформація', 'Завантаження_навантаження',
+    'Архів', 'Навантаження', 'Кафедральна_інформація_про_виклад', 'Завантаження_навантаження', 'Розподіл_навчального_навантаження',
     'Дисципліни', 'Завантажені_документи', 'Кафедра', 'Викладач'
   ];
 begin
@@ -43,7 +67,7 @@ begin
       if table_name = any(documents_tables) then
         execute format('create policy app_read on public.%I for select to authenticated using (public.has_app_role(array[''admin'',''head'',''laborant'',''teacher'']))', table_name);
         execute format('create policy app_write on public.%I for all to authenticated using (public.has_app_role(array[''admin'',''laborant'',''teacher''])) with check (public.has_app_role(array[''admin'',''laborant'',''teacher'']))', table_name);
-      elsif table_name = 'Кафедральна_інформація' then
+      elsif table_name = 'Кафедральна_інформація_про_виклад' then
         execute format('create policy app_read on public.%I for select to authenticated using (public.has_app_role(array[''admin'',''head'',''laborant'',''teacher'']))', table_name);
         execute format('create policy app_write on public.%I for all to authenticated using (public.has_app_role(array[''admin'',''laborant''])) with check (public.has_app_role(array[''admin'',''laborant'']))', table_name);
       else

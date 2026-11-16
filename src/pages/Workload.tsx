@@ -9,6 +9,7 @@ import logo from "../assets/images/logo.png";
 import { supabase } from "../utils/supabaseClient";
 import { currentUserName } from "../utils/currentUser";
 import AppSidebar from "../components/AppSidebar";
+import { exportPdfReport, exportWordReport } from "../utils/reportExport";
 
 export interface Teacher {
   id: number;
@@ -39,7 +40,7 @@ export interface Vacancy {
   academic_year?: string;
 }
 
-interface WorkloadRecord {
+export interface WorkloadRecord {
   id: number;
   teacher_id: number;
   discipline_name: string;
@@ -62,7 +63,7 @@ interface WorkloadRecord {
 
 type StudyForm = "Денна" | "Заочна";
 type Tab = "adjust" | "report" | "form56" | "vacancies" | "disciplines";
-type ImportResult = { teachers: number; disciplines: number; workloads: number };
+type ImportResult = { teachers: number; disciplines: number; workloads: number; details?: number; detailsWarning?: string };
 
 const YEARS = ["2024/2025", "2025/2026", "2026/2027"];
 const inputClass = "mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100";
@@ -172,7 +173,7 @@ export default function Workload() {
       const rows = XLSX.utils.sheet_to_json<Record<string, unknown>>(firstSheet, { defval: "" });
       if (!rawRows.length) throw new Error("Обраний аркуш не містить рядків з даними.");
       const result = isWorkPlan ? await importStudyPlan(rawRows) : await importWorkbookRows(rows);
-      setImportMessage(`Імпорт завершено: викладачів — ${result.teachers}, дисциплін — ${result.disciplines}, записів навантаження — ${result.workloads}.`);
+      setImportMessage(`Імпорт завершено: викладачів — ${result.teachers}, дисциплін — ${result.disciplines}, підсумкових записів навантаження — ${result.workloads}${result.details !== undefined ? `, деталізованих рядків — ${result.details}` : ""}.${result.detailsWarning ? ` ${result.detailsWarning}` : ""}`);
       setImportVersion((version) => version + 1);
     } catch (importError) {
       setImportMessage(importError instanceof Error ? importError.message : "Не вдалося обробити файл.");
@@ -187,24 +188,55 @@ export default function Workload() {
     const yearFromFile = title.match(/20\d{2}\s*\/\s*20\d{2}/)?.[0].replace(/\s/g, "") ?? year;
     const numeric = (value: unknown) => Number(String(value ?? "").replace(",", ".")) || 0;
     const records = rows.slice(6).map((row) => ({
-      discipline: String(row[1] ?? "").trim(), department: String(row[2] ?? "").trim(),
+      discipline: String(row[1] ?? "").trim(), department: String(row[2] ?? "").trim(), group: String(row[3] ?? "").trim(), semester: numeric(row[31]),
       lecture: numeric(row[15]), practice: numeric(row[17]), seminar: numeric(row[19]), lab: numeric(row[21]),
       exam: numeric(row[22]), credit: numeric(row[23]), courseProject: numeric(row[26]), total: numeric(row[13]),
     })).filter((row) => row.discipline && row.department && row.total > 0);
     if (!records.length) throw new Error("У файлі не знайдено рядків навчального плану. Оберіть аркуш із дисциплінами.");
 
-    const disciplinesToUpsert = [...new Map(records.map((row, index) => {
-      // `Код_дисципліни` in Supabase is character(3); P01, P02… fits exactly.
-      const code = `P${(index + 1).toString(36).toUpperCase().padStart(2, "0")}`;
-      return [code, { "Код_дисципліни": code, "Код_кафедри": row.department, "Назва_дисципліни": row.discipline }];
-    })).values()];
+    const disciplineCodes = new Map<string, string>();
+    for (const row of records) {
+      const key = `${row.department}:${row.discipline.toLocaleLowerCase("uk-UA")}`;
+      if (!disciplineCodes.has(key)) disciplineCodes.set(key, `P${(disciplineCodes.size + 1).toString(36).toUpperCase().padStart(2, "0")}`);
+    }
+    const disciplinesToUpsert = [...disciplineCodes.entries()].map(([key, code]) => {
+      const source = records.find((item) => `${item.department}:${item.discipline.toLocaleLowerCase("uk-UA")}` === key)!;
+      return { "Код_дисципліни": code, "Код_кафедри": source.department, "Назва_дисципліни": source.discipline };
+    });
     const { error: disciplinesError } = await supabase.from("Дисципліни").upsert(disciplinesToUpsert, { onConflict: "Код_дисципліни" });
     if (disciplinesError) throw new Error(`Дисципліни: ${disciplinesError.message}`);
 
-    const workloads = records.map((row) => ({ "Рік": yearFromFile, "Код_кафедри": row.department, "Код_форми_навчання": "Д", "Код_рівня_навчання": "Б", "Лекції": row.lecture, "Лабораторні_заняття": row.lab, "Практичні_заняття": row.practice, "Семінарські_заняття": row.seminar, "Екзамен": row.exam, "Залік": row.credit, "Курсовий_проект": row.courseProject }));
-    const { error: workloadsError } = await supabase.from("Завантаження_навантаження").insert(workloads);
+    // У таблиці «Завантаження_навантаження» ключем є рік + кафедра + форма + рівень.
+    // Тому з Excel зберігаємо один підсумковий рядок на кафедру, а не дублікати
+    // одного й того самого ключа для кожної дисципліни.
+    const workloadsByDepartment = new Map<string, Record<string, unknown>>();
+    for (const row of records) {
+      const key = `${yearFromFile}:${row.department}:Д:Б`;
+      const current = workloadsByDepartment.get(key) ?? { "Рік": yearFromFile, "Код_кафедри": row.department, "Код_форми_навчання": "Д", "Код_рівня_навчання": "Б", "Лекції": 0, "Лабораторні_заняття": 0, "Практичні_заняття": 0, "Семінарські_заняття": 0, "Екзамен": 0, "Залік": 0, "Курсовий_проект": 0 };
+      current["Лекції"] = number(current["Лекції"]) + row.lecture;
+      current["Лабораторні_заняття"] = number(current["Лабораторні_заняття"]) + row.lab;
+      current["Практичні_заняття"] = number(current["Практичні_заняття"]) + row.practice;
+      current["Семінарські_заняття"] = number(current["Семінарські_заняття"]) + row.seminar;
+      current["Екзамен"] = number(current["Екзамен"]) + row.exam;
+      current["Залік"] = number(current["Залік"]) + row.credit;
+      current["Курсовий_проект"] = number(current["Курсовий_проект"]) + row.courseProject;
+      workloadsByDepartment.set(key, current);
+    }
+    const workloads = [...workloadsByDepartment.values()];
+    const { error: workloadsError } = await supabase.from("Завантаження_навантаження").upsert(workloads, { onConflict: "Рік,Код_кафедри,Код_форми_навчання,Код_рівня_навчання" });
     if (workloadsError) throw new Error(`Навантаження: ${workloadsError.message}`);
-    return { teachers: 0, disciplines: disciplinesToUpsert.length, workloads: workloads.length };
+    const detailRows = records.map((row) => ({
+      "Рік": yearFromFile, "Код_кафедри": row.department,
+      "Код_дисципліни": disciplineCodes.get(`${row.department}:${row.discipline.toLocaleLowerCase("uk-UA")}`),
+      "Група": row.group || "—",
+      "Семестр": row.semester, "Лекції": row.lecture, "Лабораторні_заняття": row.lab,
+      "Практичні_заняття": row.practice, "Семінарські_заняття": row.seminar,
+      "Екзамен": row.exam, "Залік": row.credit, "Курсовий_проект": row.courseProject,
+      "Всього_годин": row.total,
+    }));
+    const { error: detailsError } = await supabase.from("Розподіл_навчального_навантаження").upsert(detailRows, { onConflict: "Рік,Код_кафедри,Код_дисципліни,Група,Семестр" });
+    const detailsWarning = detailsError ? "Деталізацію за дисциплінами поки не збережено. Виконайте supabase/workload_import_schema.sql у SQL Editor і повторіть імпорт." : undefined;
+    return { teachers: 0, disciplines: disciplinesToUpsert.length, workloads: workloads.length, details: detailsError ? undefined : detailRows.length, detailsWarning };
   };
 
   const importWorkbookRows = async (rows: Record<string, unknown>[]): Promise<ImportResult> => {
@@ -250,13 +282,6 @@ export default function Workload() {
     return { teachers: teachersToUpsert.length, disciplines: disciplinesToUpsert.length, workloads: workloadsToInsert.length };
   };
 
-  const downloadImportTemplate = () => {
-    const sheet = XLSX.utils.json_to_sheet([{ "Код_викладача": "В001", "ПІБ": "Іваненко Іван Іванович", "Код_дисципліни": "Д001", "Код_кафедри": "КН", "Назва_дисципліни": "Програмування", "Рік": year, "Код_форми_навчання": "Д", "Код_рівня_навчання": "Б", "Лекції": 30, "Лабораторні_заняття": 30, "Практичні_заняття": 0, "Семінарські_заняття": 0, "Екзамен": 6, "Залік": 0, "Курсовий_проект": 0 }]);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, sheet, "Імпорт");
-    XLSX.writeFile(workbook, "Шаблон_імпорту_навантаження.xlsx");
-  };
-
   return (
     <div className="dashboard-container">
       <AppSidebar active="workload" />
@@ -279,7 +304,7 @@ export default function Workload() {
           <div>
             <div className="header-left"><span className="welcome-text">Вітаємо, {profileName}</span><h2>Кафедра Комп&apos;ютерних Наук</h2><p className="role-sub">{role}</p></div>
           </div>
-          <div className="header-right"><button type="button" className="btn-import-workload" onClick={downloadImportTemplate}>Шаблон</button><button type="button" className="btn-import-workload" disabled={importing} onClick={() => importInputRef.current?.click()}><FiClipboard /> {importing ? "Імпорт…" : "Імпорт Excel"}</button><span className="notification-icon"><FiBell /><span className="dot" /></span><label className="academic-year"><strong>{year} навчальний рік</strong>
+          <div className="header-right"><button type="button" className="btn-import-workload" disabled={importing} onClick={() => importInputRef.current?.click()}><FiClipboard /> {importing ? "Імпорт…" : "Імпорт Excel"}</button><span className="notification-icon"><FiBell /><span className="dot" /></span><label className="academic-year"><strong>{year} навчальний рік</strong>
             <select className="date-badge" value={year} onChange={(event) => setYear(event.target.value)}>
               {YEARS.map((item) => <option key={item} value={item}>{item} навч. рік</option>)}
             </select>
@@ -307,7 +332,7 @@ export default function Workload() {
         {loading && <div className="rounded-xl bg-white p-10 text-center text-sm text-slate-500 shadow-sm">Завантаження даних…</div>}
         {!loading && activeTab === "adjust" && <AdjustTab teachers={teachers} teacherId={teacherId} setTeacherId={setTeacherId} studyForm={studyForm} setStudyForm={setStudyForm} year={year} step={adjustStep} setStep={setAdjustStep} records={teacherLoads} />}
         {!loading && activeTab === "report" && <ReportTab teachers={teachers} teacherId={teacherId} setTeacherId={setTeacherId} year={year} records={teacherLoads} visible={reportVisible} setVisible={setReportVisible} selectedTeacher={selectedTeacher} />}
-        {!loading && activeTab === "form56" && <Form56Tab teachers={teachers} records={workloads} />}
+        {!loading && activeTab === "form56" && <Form56Tab teachers={teachers} records={workloads} year={year} />}
         {!loading && activeTab === "vacancies" && <VacanciesTab step={vacancyStep} setStep={setVacancyStep} year={year} studyForm={studyForm} setStudyForm={setStudyForm} vacancies={vacancies} loading={vacanciesLoading} assigningId={assigningId} onAssign={assignVacancy} />}
         {!loading && activeTab === "disciplines" && <DisciplinesTab disciplines={disciplines} teachers={teachers} />}
       </main>
@@ -330,7 +355,13 @@ function AdjustTab(props: { teachers: Teacher[]; teacherId: number | ""; setTeac
 }
 function Summary({ label, value }: { label: string; value: number }) { return <div className="rounded-lg bg-slate-50 p-4"><p className="text-sm text-slate-500">{label}</p><p className="mt-1 text-xl font-bold text-slate-900">{hours(value)} год</p></div>; }
 function LoadTable({ records }: { records: WorkloadRecord[] }) { return <div className="overflow-x-auto"><table className="min-w-full text-left text-sm"><thead className="border-y border-slate-200 bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-4 py-3">Дисципліна</th><th className="px-4 py-3">Група</th><th className="px-4 py-3">Лекції</th><th className="px-4 py-3">Лаб.</th><th className="px-4 py-3">Практ.</th><th className="px-4 py-3">Всього</th></tr></thead><tbody className="divide-y divide-slate-100">{records.length ? records.map((row) => <tr key={row.id}><td className="px-4 py-3 font-medium text-slate-800">{row.discipline_name}</td><td className="px-4 py-3">{row.groups}</td><td className="px-4 py-3">{number(row.lectures)}</td><td className="px-4 py-3">{number(row.labs)}</td><td className="px-4 py-3">{number(row.practices)}</td><td className="px-4 py-3 font-semibold">{hours(workloadTotal(row))} год</td></tr>) : <EmptyRow columns={6} message="За обраними фільтрами записів немає." />}</tbody></table></div>; }
-function ReportTab(props: { teachers: Teacher[]; teacherId: number | ""; setTeacherId: (id: number | "") => void; year: string; records: WorkloadRecord[]; visible: boolean; setVisible: (visible: boolean) => void; selectedTeacher?: Teacher }) { return <Card><div className="flex flex-col gap-4 sm:flex-row sm:items-end"><div className="flex-1"><FormSelect label="Викладач" value={props.teacherId} onChange={(value) => props.setTeacherId(Number(value))}><TeacherOptions teachers={props.teachers} /></FormSelect></div><div className="flex-1"><FormSelect label="Рік" value={props.year} onChange={() => {}}><option>{props.year}</option></FormSelect></div><button className={primaryButton} onClick={() => props.setVisible(true)}>Показати звіт</button></div>{props.visible && <div className="mt-7"><h2 className="text-lg font-bold text-slate-900">Педагогічне навантаження</h2><p className="mb-4 text-sm text-slate-500">{props.selectedTeacher?.name ?? "Викладач"} · {props.selectedTeacher?.position}</p><LoadTable records={props.records} /></div>}</Card>; }
-function Form56Tab({ teachers, records }: { teachers: Teacher[]; records: WorkloadRecord[] }) { return <Card><h2 className="mb-5 text-lg font-bold text-slate-900">Форма 56 — виконання навчальної роботи</h2><div className="overflow-x-auto"><table className="min-w-full text-left text-sm"><thead className="border-y border-slate-200 bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-4 py-3">Викладач</th><th className="px-4 py-3">Посада</th><th className="px-4 py-3">Ставка</th><th className="px-4 py-3">Лекції</th><th className="px-4 py-3">Лабораторні</th><th className="px-4 py-3">Практичні</th><th className="px-4 py-3">Разом</th></tr></thead><tbody className="divide-y divide-slate-100">{teachers.map((teacher) => { const rows = records.filter((row) => row.teacher_id === teacher.id); return <tr key={teacher.id}><td className="px-4 py-3 font-medium">{teacher.name}</td><td className="px-4 py-3">{teacher.position}</td><td className="px-4 py-3">{teacher.rate}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.lectures), 0)}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.labs), 0)}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.practices), 0)}</td><td className="px-4 py-3 font-bold">{hours(rows.reduce<number>((sum, row) => sum + workloadTotal(row), 0))} год</td></tr>; })}</tbody></table></div></Card>; }
+function ExportActions({ title, subtitle, rows, fileName }: { title: string; subtitle: string; rows: WorkloadRecord[]; fileName: string }) {
+  return <div className="mt-4 flex flex-wrap gap-2"><button className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50" onClick={() => void exportWordReport(title, subtitle, rows, fileName)}>Завантажити Word</button><button className="rounded-lg bg-rose-600 px-3 py-2 text-sm font-semibold text-white hover:bg-rose-700" onClick={() => exportPdfReport(title, subtitle, rows, fileName)}>Завантажити PDF</button></div>;
+}
+function ReportTab(props: { teachers: Teacher[]; teacherId: number | ""; setTeacherId: (id: number | "") => void; year: string; records: WorkloadRecord[]; visible: boolean; setVisible: (visible: boolean) => void; selectedTeacher?: Teacher }) {
+  const teacherName = props.selectedTeacher?.name ?? "Викладач";
+  return <Card><div className="flex flex-col gap-4 sm:flex-row sm:items-end"><div className="flex-1"><FormSelect label="Викладач" value={props.teacherId} onChange={(value) => props.setTeacherId(Number(value))}><TeacherOptions teachers={props.teachers} /></FormSelect></div><div className="flex-1"><FormSelect label="Рік" value={props.year} onChange={() => {}}><option>{props.year}</option></FormSelect></div><button className={primaryButton} onClick={() => props.setVisible(true)}>Показати звіт</button></div>{props.visible && <div className="mt-7"><h2 className="text-lg font-bold text-slate-900">Карта педагогічного навантаження</h2><p className="mb-4 text-sm text-slate-500">{teacherName} · {props.selectedTeacher?.position} · {props.year} навчальний рік</p><LoadTable records={props.records} /><ExportActions title="Карта педагогічного навантаження" subtitle={`${teacherName}, ${props.year} навчальний рік`} rows={props.records} fileName={`Карта_навантаження_${teacherName.replace(/\s+/g, "_")}`} /></div>}</Card>;
+}
+function Form56Tab({ teachers, records, year }: { teachers: Teacher[]; records: WorkloadRecord[]; year: string }) { return <Card><div className="flex flex-wrap items-start justify-between gap-4"><div><h2 className="mb-1 text-lg font-bold text-slate-900">Форма 56 — виконання навчальної роботи</h2><p className="text-sm text-slate-500">Зведений звіт по всіх викладачах за {year} навчальний рік.</p></div><ExportActions title="Зведений звіт кафедри (форма 56)" subtitle={`${year} навчальний рік`} rows={records} fileName={`Зведений_звіт_кафедри_${year.replace("/", "-")}`} /></div><div className="mt-5 overflow-x-auto"><table className="min-w-full text-left text-sm"><thead className="border-y border-slate-200 bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-4 py-3">Викладач</th><th className="px-4 py-3">Посада</th><th className="px-4 py-3">Ставка</th><th className="px-4 py-3">Лекції</th><th className="px-4 py-3">Лабораторні</th><th className="px-4 py-3">Практичні</th><th className="px-4 py-3">Разом</th></tr></thead><tbody className="divide-y divide-slate-100">{teachers.map((teacher) => { const rows = records.filter((row) => row.teacher_id === teacher.id); return <tr key={teacher.id}><td className="px-4 py-3 font-medium">{teacher.name}</td><td className="px-4 py-3">{teacher.position}</td><td className="px-4 py-3">{teacher.rate}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.lectures), 0)}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.labs), 0)}</td><td className="px-4 py-3">{rows.reduce<number>((sum, row) => sum + number(row.practices), 0)}</td><td className="px-4 py-3 font-bold">{hours(rows.reduce<number>((sum, row) => sum + workloadTotal(row), 0))} год</td></tr>; })}</tbody></table></div></Card>; }
 function VacanciesTab(props: { step: 1 | 2; setStep: (step: 1 | 2) => void; year: string; studyForm: StudyForm; setStudyForm: (form: StudyForm) => void; vacancies: Vacancy[]; loading: boolean; assigningId: number | null; onAssign: (vacancy: Vacancy) => void }) { if (props.step === 1) return <Card><div className="mx-auto max-w-md py-3"><h2 className="text-center text-xl font-bold text-slate-900">Вакансії</h2><p className="mt-1 text-center text-sm text-slate-500">Оберіть параметри для пошуку вакантного навантаження.</p><div className="mt-6 grid gap-4"><FormSelect label="Навчальний рік" value={props.year} onChange={() => {}}><option>{props.year}</option></FormSelect><FormSelect label="Форма навчання" value={props.studyForm} onChange={(value) => props.setStudyForm(value as StudyForm)}><option>Денна</option><option>Заочна</option></FormSelect><div className="mt-2 flex gap-3"><button className={`flex-1 ${primaryButton}`} onClick={() => props.setStep(2)}>Далі</button><button className="flex-1 rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-50" onClick={() => props.setStep(1)}>Відмінити</button></div></div></div></Card>; return <Card><div className="mb-5 flex items-start justify-between gap-4"><div><h2 className="text-lg font-bold">Вакантне навантаження</h2><p className="text-sm text-slate-500">{props.year} · {props.studyForm} форма</p></div><button className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50" onClick={() => props.setStep(1)}>Назад</button></div><div className="overflow-x-auto"><table className="min-w-full text-left text-sm"><thead className="border-y border-slate-200 bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-4 py-3">Назва навчальної дисципліни</th><th className="px-4 py-3">Група / потік</th><th className="px-4 py-3">Тип роботи</th><th className="px-4 py-3">Години</th><th className="px-4 py-3">Дія</th></tr></thead><tbody className="divide-y divide-slate-100">{props.loading ? <EmptyRow columns={5} message="Завантаження вакансій…" /> : props.vacancies.length ? props.vacancies.map((vacancy) => <tr key={vacancy.id}><td className="px-4 py-3 font-medium text-slate-800">{vacancy.discipline_name}</td><td className="px-4 py-3">{vacancy.group_code}</td><td className="px-4 py-3">{vacancy.work_type}</td><td className="px-4 py-3 font-bold text-red-600">{hours(number(vacancy.hours))} год</td><td className="px-4 py-3"><button disabled={props.assigningId === vacancy.id} className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 hover:bg-blue-100 disabled:opacity-50" onClick={() => props.onAssign(vacancy)}>{props.assigningId === vacancy.id ? "Збереження…" : "Призначити"}</button></td></tr>) : <EmptyRow columns={5} message="Вакантного навантаження не знайдено." />}</tbody></table></div></Card>; }
 function DisciplinesTab({ disciplines, teachers }: { disciplines: Discipline[]; teachers: Teacher[] }) { return <Card><h2 className="mb-5 text-lg font-bold text-slate-900">Усі дисципліни кафедри</h2><div className="overflow-x-auto"><table className="min-w-full text-left text-sm"><thead className="border-y border-slate-200 bg-slate-50 text-xs uppercase text-slate-500"><tr><th className="px-4 py-3">Дисципліна</th><th className="px-4 py-3">Семестр</th><th className="px-4 py-3">Години</th><th className="px-4 py-3">Закріплений викладач</th></tr></thead><tbody className="divide-y divide-slate-100">{disciplines.length ? disciplines.map((discipline) => <tr key={discipline.id}><td className="px-4 py-3 font-medium">{discipline.name}</td><td className="px-4 py-3">{discipline.semester}</td><td className="px-4 py-3">{hours(number(discipline.hours))}</td><td className="px-4 py-3">{teachers.find((teacher) => teacher.id === discipline.teacher_id)?.name ?? "Не призначено"}</td></tr>) : <EmptyRow columns={4} message="Дисциплін за цей навчальний рік немає." />}</tbody></table></div></Card>; }
